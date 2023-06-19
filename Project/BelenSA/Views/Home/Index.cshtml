@@ -1,0 +1,54 @@
+﻿@using BelenSA.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (!string.IsNullOrEmpty(UserMessagesViewModel.SuccessMessage))
+{
+    <div class="alert alert-success" role="alert">
+         @UserMessagesViewModel.SuccessMessage.ToString()
+        <button type="button" id="alertClose" class="btn btn-danger btn-sm float-end cookie-btn okbtn" data-dismiss="alert" aria-label="Close">OK</button>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(UserMessagesViewModel.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @UserMessagesViewModel.ErrorMessage.ToString()
+        <button type="button" id="alertClose" class="btn btn-danger btn-sm float-end cookie-btn okbtn" data-dismiss="alert" aria-label="Close">OK</button>
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="mt-5 display-4">Welcome to our subscription web</h1>
+</div>
+
+<div class="mt-5 text-center">
+    <button type="button" class="btn btn-info btn-lg">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Subscriber" asp-action="Create">Subscribe!!</a>
+    </button>
+</div>
+
+
+@section Scripts {
+
+    <script>
+$(document).ready(function(){
+localStorage.setItem("acceptCookies", true);
+ $(".alert").hide();
+ if (typeof(Storage) !== "undefined") {
+  if (localStorage.getItem("acceptCookies")) {
+    $(".alert").show();
+    $("#alertClose").click(function(){
+      localStorage.setItem("acceptCookies", "accepted");
+      $(".alert").alert("close");
+    });
+  }
+ } 
+});
+</script>
+
+
+}
